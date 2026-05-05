@@ -8,11 +8,6 @@ on:
     - cron: '15 6 * * *'
   workflow_dispatch:  # lets you trigger manually from the Actions tab
 
-# Share with all other daily workflows so pushes don't race
-concurrency:
-  group: daily-commits
-  cancel-in-progress: false
-
 jobs:
   fetch:
     runs-on: ubuntu-latest

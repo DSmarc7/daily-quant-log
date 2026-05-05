@@ -14,3 +14,19 @@ See [`SETUP.md`](./SETUP.md) for everything: pushing to GitHub, configuring the 
 
 ## Why this repo
 Building a habit log + a portfolio asset at the same time. The market data accumulates into a real dataset usable for backtesting later, and the LeetCode + TIL entries become a personal reference I can search.
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Array
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0014-longest-common-prefix](https://github.com/DSmarc7/daily-quant-log/tree/main/0014-longest-common-prefix/) | Easy |
+## String
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0014-longest-common-prefix](https://github.com/DSmarc7/daily-quant-log/tree/main/0014-longest-common-prefix/) | Easy |
+## Trie
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0014-longest-common-prefix](https://github.com/DSmarc7/daily-quant-log/tree/main/0014-longest-common-prefix/) | Easy |
+<!---LeetCode Topics End-->

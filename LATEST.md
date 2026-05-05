@@ -1,4 +1,29 @@
-# Market snapshot
+# Market snapshot — 2026-05-05 (UTC)
 
-_No data yet — this file is overwritten by the daily GitHub Action.
-First values will appear after the first successful workflow run._
+
+## INDICES
+
+| Asset | Date | Close | Change |
+|---|---|---|---|
+| SP500 | 2026-05-05 | 7259.2202 | 🟢 +0.81% |
+| CAC40 | 2026-05-04 | 7976.1201 | 🔴 -1.71% |
+| NIKKEI | 2026-05-01 | 59513.1211 | 🟢 +0.39% |
+| EUROSTOXX50 | 2026-05-04 | 5763.6099 | 🔴 -2.00% |
+| FTSE100 | 2026-05-05 | 10219.1104 | 🔴 -1.40% |
+
+## CRYPTO
+
+| Asset | Date | Close | Change |
+|---|---|---|---|
+| BTC | 2026-05-05 | 80937.3594 | 🟢 +1.39% |
+| ETH | 2026-05-05 | 2376.99 | 🟢 +1.30% |
+| SOL | 2026-05-05 | 84.87 | 🟢 +0.93% |
+
+## FX
+
+| Asset | Date | Close | Change |
+|---|---|---|---|
+| EURUSD | 2026-05-05 | 1.1697 | 🔴 -0.25% |
+| USDJPY | 2026-05-05 | 157.872 | 🟢 +0.65% |
+| GBPUSD | 2026-05-05 | 1.354 | 🔴 -0.30% |
+| EURJPY | 2026-05-05 | 184.586 | 🟢 +0.35% |

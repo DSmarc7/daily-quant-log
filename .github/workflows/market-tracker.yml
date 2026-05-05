@@ -8,6 +8,11 @@ on:
     - cron: '15 6 * * *'
   workflow_dispatch:  # lets you trigger manually from the Actions tab
 
+# Share with all other daily workflows so pushes don't race
+concurrency:
+  group: daily-commits
+  cancel-in-progress: false
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -15,6 +20,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -36,5 +43,10 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "market: snapshot $(date -u +%Y-%m-%d)"
-            git push
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && exit 0
+              echo "push attempt $i failed, retrying..."
+              sleep $((i * 5))
+            done
+            exit 1
           fi

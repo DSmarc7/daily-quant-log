@@ -6,6 +6,10 @@ on:
     - cron: '0 6 * * *'
   workflow_dispatch:
 
+concurrency:
+  group: daily-commits
+  cancel-in-progress: false
+
 jobs:
   create:
     runs-on: ubuntu-latest
@@ -13,6 +17,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Create today's TIL skeleton
         run: |
@@ -51,5 +57,10 @@ jobs:
             echo "No new skeleton to commit"
           else
             git commit -m "til: skeleton $(date -u +%Y-%m-%d)"
-            git push
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && exit 0
+              echo "push attempt $i failed, retrying..."
+              sleep $((i * 5))
+            done
+            exit 1
           fi

@@ -72,3 +72,24 @@ python tracker.py
 ```
 
 You should see new rows appended in `data/indices.csv`, `data/crypto.csv`, `data/fx.csv`, and a fresh `LATEST.md` at the repo root.
+
+## 6. Other automated trackers
+
+Three additional GitHub Actions run daily, each producing one independent commit:
+
+| Workflow | Schedule (UTC) | Output |
+|---|---|---|
+| `market-tracker.yml` | 22:30 + 06:15 | `market-tracker/data/*.csv`, `LATEST.md` |
+| `til-skeleton.yml` | 06:00 | `til/YYYY/MM/YYYY-MM-DD-skeleton.md` (rename + fill it) |
+| `arxiv-tracker.yml` | 07:00 | `arxiv-tracker/papers/YYYY/MM/YYYY-MM-DD.md` |
+| `fear-greed.yml` | 08:30 | `fear-greed/data/fear_greed.csv` |
+
+All four are wired with the noreply email so commits land on your contribution graph.
+
+### Maximizing the contribution graph
+
+- A day = one green square as soon as **≥ 1 commit** is authored with your verified email. Intensity (light → dark green) scales with commit count.
+- The four daily workflows + LeetHub auto-push + manual TIL fill-in already give you 5–6 commits/day with zero effort.
+- **GitHub disables scheduled workflows after 60 days of repo inactivity.** As long as you push something manually (a TIL, a leetcode note) at least every two months, the cron stays alive.
+- Cron isn't precise — runs can be delayed by 30–60 min under GitHub Actions load. The two daily times for `market-tracker` are intentional redundancy.
+- All commits must be authored with `95468047+DSmarc7@users.noreply.github.com` (or another verified email on your account) to count. The four workflows are already configured.

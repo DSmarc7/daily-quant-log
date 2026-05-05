@@ -1,0 +1,40 @@
+name: Daily market snapshot
+
+on:
+  schedule:
+    # 22:30 UTC = ~23:30 Paris winter / ~00:30 Paris summer (after US close)
+    # Two times to maximize chance one runs (GitHub sometimes drops crons under load)
+    - cron: '30 22 * * *'
+    - cron: '15 6 * * *'
+  workflow_dispatch:  # lets you trigger manually from the Actions tab
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r market-tracker/requirements.txt
+
+      - name: Fetch market data
+        run: python market-tracker/tracker.py
+
+      - name: Commit & push
+        run: |
+          git config user.name "Marc-Antoine DA SILVA"
+          git config user.email "95468047+DSmarc7@users.noreply.github.com"
+          git add market-tracker/data LATEST.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "market: snapshot $(date -u +%Y-%m-%d)"
+            git push
+          fi

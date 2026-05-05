@@ -1,0 +1,55 @@
+name: Daily TIL skeleton
+
+on:
+  schedule:
+    # 06:00 UTC = ~07:00 Paris winter / ~08:00 été — fichier prêt au réveil
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create today's TIL skeleton
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          YEAR=$(date -u +%Y)
+          MONTH=$(date -u +%m)
+          DIR="til/${YEAR}/${MONTH}"
+          FILE="${DIR}/${DATE}-skeleton.md"
+          mkdir -p "${DIR}"
+          if [ ! -f "${FILE}" ]; then
+            cat > "${FILE}" <<EOF
+          # TIL — ${DATE}
+
+          **Topic:** _(rename file: ${DATE}-<topic-slug>.md)_
+
+          ## What I learned
+
+          -
+
+          ## Why it matters
+
+          -
+
+          ## Source / link
+
+          -
+          EOF
+          fi
+
+      - name: Commit & push
+        run: |
+          git config user.name "Marc-Antoine DA SILVA"
+          git config user.email "95468047+DSmarc7@users.noreply.github.com"
+          git add til/
+          if git diff --cached --quiet; then
+            echo "No new skeleton to commit"
+          else
+            git commit -m "til: skeleton $(date -u +%Y-%m-%d)"
+            git push
+          fi
